@@ -72,7 +72,7 @@ The application will run on `http://localhost:3000`
   ```json
   {
     "user": {
-      "id": 1,
+      "id": "uuid-string",
       "email": "user@example.com",
       "name": "John Doe",
       "createdAt": "2024-01-01T00:00:00.000Z"
@@ -94,7 +94,7 @@ The application will run on `http://localhost:3000`
   ```json
   {
     "user": {
-      "id": 1,
+      "id": "uuid-string",
       "email": "user@example.com",
       "name": "John Doe",
       "createdAt": "2024-01-01T00:00:00.000Z"
@@ -112,7 +112,7 @@ The application will run on `http://localhost:3000`
 - **Response:**
   ```json
   {
-    "id": 1,
+    "id": "uuid-string",
     "email": "user@example.com",
     "name": "John Doe",
     "createdAt": "2024-01-01T00:00:00.000Z"
@@ -132,11 +132,15 @@ src/
 │   ├── auth.service.ts
 │   ├── jwt.strategy.ts
 │   └── jwt-auth.guard.ts
-├── prisma/
-│   ├── prisma.module.ts
-│   └── prisma.service.ts
+├── database/
+│   ├── database.module.ts
+│   └── database.service.ts
 ├── app.module.ts
 └── main.ts
+
+prisma/
+├── schema.prisma
+└── migrations/
 ```
 
 ## Environment Variables
@@ -150,12 +154,17 @@ JWT_EXPIRES_IN="1d"
 ## Database Schema
 
 The User model includes:
-- `id`: Auto-incrementing integer (primary key)
+- `id`: UUID string (primary key)
 - `email`: Unique string
 - `password`: Hashed password string
 - `name`: Optional string
+- `emailVerified`: Optional timestamp for email verification
 - `createdAt`: Timestamp
 - `updatedAt`: Timestamp
+
+Additional models:
+- `Session`: For managing user sessions
+- `VerificationToken`: For email verification tokens
 
 ## Security Features
 
